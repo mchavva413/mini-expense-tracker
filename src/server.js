@@ -2,12 +2,13 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const { addExpense, viewExpenses, calculateTotalExpenses, deleteExpense, updateExpense } = require('./expenseTracker');
-
-// Middleware to parse JSON body
+// Middleware to parse JSON
 app.use(express.json());
 
-// Home route
+// Expenses array must be outside the routes
+let expenses = [];
+
+// Home Route
 app.get('/', (req, res) => {
   res.send('Welcome to the Mini Expense Tracker API!');
 });
@@ -15,49 +16,52 @@ app.get('/', (req, res) => {
 // Add a new expense
 app.post('/add', (req, res) => {
   const { date, amount, category, description } = req.body;
-  try {
-    const expense = addExpense(date, amount, category, description);
-    res.status(201).json(expense);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
+  const newExpense = {
+    id: expenses.length + 1,
+    date,
+    amount,
+    category,
+    description
+  };
+  expenses.push(newExpense);
+  res.status(201).json(newExpense);
 });
 
 // View all expenses
 app.get('/view', (req, res) => {
-  try {
-    const expenses = viewExpenses();
-    res.status(200).json(expenses);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+  res.json(expenses);
 });
 
-// Delete an expense by ID
-app.delete('/delete/:id', (req, res) => {
-  const { id } = req.params;
-  try {
-    deleteExpense(parseInt(id));
-    res.status(200).json({ message: 'Expense deleted successfully.' });
-  } catch (error) {
-    res.status(404).json({ error: error.message });
-  }
-});
-
-// Update an expense by ID
+// Update an expense
 app.put('/update/:id', (req, res) => {
-  const { id } = req.params;
-  const { date, amount, category, description } = req.body;
-  try {
-    const updatedExpense = updateExpense(parseInt(id), date, amount, category, description);
-    res.status(200).json(updatedExpense);
-  } catch (error) {
-    res.status(404).json({ error: error.message });
+  const id = parseInt(req.params.id);
+  const { amount, description } = req.body;
+  const expense = expenses.find(exp => exp.id === id);
+
+  if (expense) {
+    if (amount) expense.amount = amount;
+    if (description) expense.description = description;
+    res.json(true);
+  } else {
+    res.json(false);
   }
 });
 
-// Server listen
+// Delete an expense
+app.delete('/delete/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const index = expenses.findIndex(exp => exp.id === id);
+
+  if (index !== -1) {
+    expenses.splice(index, 1);
+    res.json(true);
+  } else {
+    res.json(false);
+  }
+});
+
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server running on port ${port}`);
 });
 
