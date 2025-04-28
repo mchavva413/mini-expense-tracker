@@ -1,16 +1,21 @@
 {
   "name": "mini-expense-tracker",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A simple mini expense tracker backend with Node.js, Mocha testing, and GitHub Actions CI/CD.",
+  "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Akshit Chavva",
   "license": "ISC",
-  "description": "",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
   "devDependencies": {
-    "chai": "^4.3.7",
-    "mocha": "^11.1.0"
+    "chai": "4.3.7",
+    "mocha": "^10.2.0"
   }
 }
+
