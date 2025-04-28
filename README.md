@@ -45,5 +45,4 @@ It supports basic CRUD operations, calculates total expenses, and includes white
 - ✅ Postman used for API verification
 - ✅ Automated test execution using GitHub Actions
 
-## How to Run Locally
-1. Clone the repository:
+
