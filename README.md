@@ -16,7 +16,7 @@ It supports basic CRUD operations, calculates total expenses, and includes white
 - Postman collection created for API testing
 
 ## Live Application
-👉 [Mini Expense Tracker Live on Render](https://mini-expense-tracker-xt4x.onrender.com/)
+ [Mini Expense Tracker Live on Render](https://mini-expense-tracker-xt4x.onrender.com/)
 
 ## API Endpoints
 
@@ -38,11 +38,11 @@ It supports basic CRUD operations, calculates total expenses, and includes white
 - GitHub Actions (CI/CD Automation)
 
 ## Testing Details
-- ✅ White-box testing (Mocha unit tests)
-- ✅ Black-box testing:
+- White-box testing (Mocha unit tests)
+- Black-box testing:
   - Boundary Value Analysis (BVA)
   - Equivalence Class Partitioning (ECP)
-- ✅ Postman used for API verification
-- ✅ Automated test execution using GitHub Actions
+- Postman used for API verification
+- Automated test execution using GitHub Actions
 
 
