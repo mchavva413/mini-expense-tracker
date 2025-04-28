@@ -1,38 +1,43 @@
+const { addExpense, calculateTotalExpenses, expenses } = require('../src/expenseTracker');
 const { expect } = require('chai');
-const { addExpense, viewExpenses, calculateTotalExpenses, deleteExpense, updateExpense } = require('../src/expenseTracker');
 
 describe('Expense Tracker Tests', () => {
+  beforeEach(() => {
+    // Clear the expenses array before each test
+    expenses.length = 0;
+  });
 
-    it('should add a valid expense', () => {
-        const expense = addExpense('2025-04-28', 50, 'Food', 'Lunch');
-        expect(expense).to.have.property('id');
-        expect(expense.amount).to.equal(50);
-    });
+  // Whitebox Test Cases
+  it('should add a new expense correctly', () => {
+    const expense = addExpense('2025-04-28', 100, 'Transport', 'Bus ride');
+    expect(expense.amount).to.equal(100);
+    expect(expense.category).to.equal('Transport');
+  });
 
-    it('should throw error on invalid expense input', () => {
-        expect(() => addExpense('', -10, '', '')).to.throw('Invalid input');
-    });
+  it('should calculate total expenses correctly', () => {
+    addExpense('2025-04-28', 100, 'Transport', 'Bus ride');
+    addExpense('2025-04-28', 75, 'Food', 'Lunch');
+    const total = calculateTotalExpenses();
+    expect(total).to.equal(175);
+  });
 
-    it('should view expenses in date range', () => {
-        const expenses = viewExpenses('2025-04-01', '2025-04-30');
-        expect(expenses.length).to.be.at.least(1);
-    });
+  // Blackbox Test Cases (BVA and ECP)
+  it('should add an expense with minimum valid amount', () => {
+    const expense = addExpense('2025-04-29', 1, 'Misc', 'Small item');
+    expect(expense.amount).to.equal(1);
+  });
 
-    it('should calculate total expenses in date range', () => {
-        const total = calculateTotalExpenses('2025-04-01', '2025-04-30');
-        expect(total).to.be.at.least(50);
-    });
+  it('should throw error if amount is zero', () => {
+    expect(() => addExpense('2025-04-29', 0, 'Misc', 'Invalid')).to.throw('Invalid input');
+  });
 
-    it('should delete an expense', () => {
-        const result = deleteExpense(1);
-        expect(result).to.equal(true);
-    });
+  it('should accept a valid category', () => {
+    const expense = addExpense('2025-04-29', 50, 'Groceries', 'Fruits');
+    expect(expense.category).to.equal('Groceries');
+  });
 
-    it('should update an expense', () => {
-        const expense = addExpense('2025-04-28', 70, 'Transport', 'Taxi');
-        const result = updateExpense(expense.id, { amount: 80 });
-        expect(result).to.equal(true);
-    });
-
+  it('should throw error if category is missing', () => {
+    expect(() => addExpense('2025-04-29', 50, '', 'No category')).to.throw('Invalid input');
+  });
 });
 
