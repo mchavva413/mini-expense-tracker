@@ -2,7 +2,7 @@
   "name": "mini-expense-tracker",
   "version": "1.0.0",
   "description": "A simple mini expense tracker backend with Node.js, Mocha testing, and GitHub Actions CI/CD.",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "mocha",
     "start": "node server.js"
