@@ -1,30 +1,21 @@
 {
   "name": "mini-expense-tracker",
   "version": "1.0.0",
-  "description": "This project is a simple backend application built with **Node.js** and **Express.js** to track daily expenses.   It supports basic CRUD operations (Create, Read, Update, Delete) for managing expenses.",
+  "description": "A simple backend API for tracking expenses",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mchavva413/mini-expense-tracker.git"
+    "url": "https://github.com/mchavva413/mini-expense-tracker.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Your Name",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mchavva413/mini-expense-tracker/issues"
-  },
-  "homepage": "https://github.com/mchavva413/mini-expense-tracker#readme",
   "devDependencies": {
-    "chai": "^5.2.0",
+    "chai": "^4.3.6",
     "mocha": "^11.1.0"
-  },
-  "dependencies": {
-    "express": "^5.1.0"
   }
 }
+
